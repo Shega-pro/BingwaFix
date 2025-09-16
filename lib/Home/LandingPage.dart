@@ -8,58 +8,41 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.green,
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 60),
+              const SizedBox(height: 80),
               const Center(
                 child: Text(
                   'Welcome to BingwaFix',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w900,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 28, color: Colors.white),
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(height: 30,),
               const Center(
                 child: Text(
                   'Connecting skilled & trustworthy Fundi with customers who need their services',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
-                    color: Colors.white70,
+                    color: Colors.white,
                   ),
                 ),
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 120),
               _buildServiceCard(
                 title: 'I Need Services',
-                subtitle: 'Find qualified technicians for your home and office repair needs',
-                features: [
-                  'Post service requests instantly',
-                  'Get matched with verified fundis',
-                  'Track job progress in real-time',
-                  'Rate and review services',
-                ],
-                buttonText: 'Continue as Customer',
+                buttonText: 'Join as Customer',
                 context: context,
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height:40),
               _buildServiceCard(
                 title: 'I Offer Services',
-                subtitle: 'Join our network of skilled technicians and grow your business',
-                features: [
-                  'Access job opportunities in your area',
-                  'Pay-per-lead model (1 credit per job)',
-                  'Build your reputation with reviews',
-                  'Manage jobs through mobile app',
-                ],
-                buttonText: 'Join Fundi Network',
+                buttonText: 'Join as Fundi',
                 context: context,
               ),
               const SizedBox(height: 30),
@@ -72,8 +55,6 @@ class LandingPage extends StatelessWidget {
 
   Widget _buildServiceCard({
     required String title,
-    required String subtitle,
-    required List<String> features,
     required String buttonText,
     required BuildContext context,
   }) {
@@ -96,54 +77,30 @@ class LandingPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+            Center(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              subtitle,
-              style: const TextStyle(
-                fontSize: 15,
-                color: Colors.blueGrey,
-              ),
-            ),
-            const SizedBox(height: 16),
+
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: features.map((feature) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.check_circle, color: Colors.blue, size: 16),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          feature,
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  if (buttonText == 'Continue as Customer') {
+                  if (buttonText == 'Join as Customer') {
                     Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => LoginPage())
                     );
-                  } else if (buttonText == 'Join Fundi Network') {
+                  } else if (buttonText == 'Join as Fundi') {
                     Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => FundiAuthPortal())
@@ -151,14 +108,14 @@ class LandingPage extends StatelessWidget {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                   foregroundColor: Colors.white,
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Colors.green,
                 ),
-                child: Text(buttonText,style: TextStyle(fontSize: 16),),
+                child: Text(buttonText,style: TextStyle(fontSize: 14),),
               ),
             ),
           ],
