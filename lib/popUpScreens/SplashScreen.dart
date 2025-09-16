@@ -24,17 +24,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.green,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.build_circle_outlined,
                 size: 120,
-                color: Colors.black,
+                color: Colors.white,
               ),
               SizedBox(height: 21,),
-              Text("BingwaFix",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.black),)
+              Text("BINGWAFIX",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.white),)
             ],
           ),
         )
