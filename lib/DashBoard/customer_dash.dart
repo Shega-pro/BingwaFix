@@ -199,9 +199,9 @@ class _CustomerDashboard extends State<CustomerDashboard> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Hello, ${user?['full_name']}', style: TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Roboto', fontSize: 22),),
+        title: Text('Hello, ${user?['full_name']}', style: TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Roboto', fontSize: 22, color: Colors.white),),
         centerTitle: false,
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.green,
         actions: [
           IconButton(
             icon: const Icon(Icons.person, size: 35,), color: Colors.white,
@@ -310,11 +310,11 @@ class _CustomerDashboard extends State<CustomerDashboard> {
                   );
                   },
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 06),
-                      backgroundColor: Colors.blueGrey,
+                      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 04),
+                      backgroundColor: Colors.green,
                       foregroundColor: Colors.white,
                     ),
-                    child: const Text("Use current location", style: TextStyle(fontSize: 13),),
+                    child: const Text("Use current location", style: TextStyle(fontSize: 12),),
                   )
               ),
             ),
@@ -394,7 +394,7 @@ class _CustomerDashboard extends State<CustomerDashboard> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   foregroundColor: Colors.white,
-                  backgroundColor: Colors.blueGrey
+                  backgroundColor: Colors.green
               ),
               child: const Text('Submit Request', style: TextStyle(fontSize: 18),),
             ),
