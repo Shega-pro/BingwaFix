@@ -8,7 +8,7 @@ class CustomerStackPage extends StatefulWidget {
   const CustomerStackPage({super.key});
 
   @override
-  State<CustomerStackPage> createState() => _CustomerStackPageState();
+  _CustomerStackPageState createState() => _CustomerStackPageState();
 }
 
 class _CustomerStackPageState extends State<CustomerStackPage> {
@@ -53,8 +53,8 @@ class _CustomerStackPageState extends State<CustomerStackPage> {
             label: 'Settings',
           ),
         ],
-        currentIndex: 0,
-        selectedItemColor: Colors.blue,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.green,
         unselectedItemColor: Colors.grey,
       ),
     );
