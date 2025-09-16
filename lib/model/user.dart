@@ -1,8 +1,10 @@
 // A class to represent the user
 
 class User {
-  final String name;
+  final String Id;
+  final String fname;
+  final String lname;
 
-  User({required this.name});
+  User({required this.Id, required this.fname, required this.lname});
 
 }
