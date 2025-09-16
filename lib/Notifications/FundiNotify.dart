@@ -5,7 +5,7 @@ class FundiNotificationsPage extends StatefulWidget {
   const FundiNotificationsPage({super.key});
 
   @override
-  State<FundiNotificationsPage> createState() => _FundiNotificationsPageState();
+  _FundiNotificationsPageState createState() => _FundiNotificationsPageState();
 }
 
 class _FundiNotificationsPageState extends State<FundiNotificationsPage> {
@@ -57,7 +57,8 @@ class _FundiNotificationsPageState extends State<FundiNotificationsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notifications'),
+        title: const Text('Notifications', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24, color: Colors.white),),
+        backgroundColor: Colors.blueGrey,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
