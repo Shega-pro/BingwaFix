@@ -25,6 +25,7 @@ class _DashPage extends State<DashPage> {
     _fetchAllJobs();
   }
 
+  // Jobs with status == pending
   Future<void> _fetchAllJobs() async {
     try {
       final response = await http.get(
@@ -74,9 +75,7 @@ class _DashPage extends State<DashPage> {
                 child: Text('Close'),
               ),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AcceptJob()));
-                  },
+                  onPressed: _acceptbuild,
                   child: Text('Accept Job')
               )
             ],
@@ -90,11 +89,9 @@ class _DashPage extends State<DashPage> {
     final fundi = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     return Scaffold(
       appBar: AppBar(
-        // title: const Text('Fundi Dashboard', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),),
-        title: Text('Technician, ${fundi?['lname']}', style: TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Roboto', fontSize: 22,color: Colors.white),),
+        title: Text('Welcome, ${fundi?['lname']}', style: TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Roboto', fontSize: 22,color: Colors.white),),
         automaticallyImplyLeading: false,
-        // centerTitle: true,
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.green,
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications, color: Colors.white,),
@@ -114,25 +111,21 @@ class _DashPage extends State<DashPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Row with Name + Badge
-            Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'New Jobs awaits',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54),
-                  ),
-                ],
+            // Title
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
+              child: Text(
+                'New Jobs awaits',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
               ),
             ),
             const SizedBox(height: 20),
 
-            // Row with two cards side by side
+            // Row with two cards
             Row(
               children: [
                 // Wallet card
@@ -141,17 +134,12 @@ class _DashPage extends State<DashPage> {
                     elevation: 3,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            '96 Credits',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                      child: const Text(
+                        '96 Credits',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -170,7 +158,9 @@ class _DashPage extends State<DashPage> {
                           const Text(
                             'Ratings',
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const Spacer(),
                           Row(
@@ -202,6 +192,8 @@ class _DashPage extends State<DashPage> {
               ),
             ),
 
+            const SizedBox(height: 10),
+
             _isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : _jobs.isEmpty
@@ -209,8 +201,7 @@ class _DashPage extends State<DashPage> {
               padding: EdgeInsets.only(top: 200.0),
               child: Column(
                 children: [
-                  Icon(Icons.work_outline,
-                      size: 50, color: Colors.grey),
+                  Icon(Icons.work_outline, size: 50, color: Colors.grey),
                   SizedBox(height: 10),
                   Text(
                     'No new job requests available',
@@ -219,51 +210,36 @@ class _DashPage extends State<DashPage> {
                 ],
               ),
             )
-                : SizedBox(
-              height: 400, // 👈 give bounded height
-              child: ListView.builder(
-                itemCount: _jobs.length,
-                itemBuilder: (context, index) {
-                  final job = _jobs[index];
-                  return Card(
-                    margin: const EdgeInsets.all(10),
-                    child: ListTile(
-                      title: Text(job['category'] ?? 'Job'),
-                      subtitle: Text(job['location'] ?? ''),
-                      trailing:
-                      const Icon(Icons.arrow_forward_ios),
-                      onTap: () => _showJobDetails(job),
-                    ),
-                  );
-                },
-              ),
+                : ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _jobs.length,
+              itemBuilder: (context, index) {
+                final job = _jobs[index];
+                return Card(
+                  margin: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: ListTile(
+                    title: Text(job['category'] ?? 'Job'),
+                    subtitle: Text(job['location'] ?? ''),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () => _showJobDetails(job),
+                  ),
+                );
+              },
             ),
           ],
         ),
       ),
-
     );
   }
-}
 
-class AcceptJob extends StatefulWidget {
-  const AcceptJob ({super.key});
-
-  @override
-  State<AcceptJob> createState() => _AcceptJobState();
-}
-
-class _AcceptJobState extends State<AcceptJob> {
-  Widget build(BuildContext context) {
+  Widget _acceptbuild() {
     return Scaffold(
       body: Container(
-        child: Column(
-          children: [
-            Text('Coming soon!')
-          ],
+        child: Center(
+          child: Text('Coming soon!', style: TextStyle(fontSize: 20, color: Colors.blue),)
         ),
       ),
     );
   }
-
 }
