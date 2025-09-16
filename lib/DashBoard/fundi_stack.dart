@@ -9,7 +9,7 @@ class FundiStackPage extends StatefulWidget {
   const FundiStackPage({super.key});
 
   @override
-  State<FundiStackPage> createState() => _FundiStackPageState();
+  _FundiStackPageState createState() => _FundiStackPageState();
 }
 
 class _FundiStackPageState extends State<FundiStackPage> {
@@ -53,7 +53,7 @@ class _FundiStackPageState extends State<FundiStackPage> {
             label: 'Settings',
           ),
         ],
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.green,
         unselectedItemColor: Colors.grey,
         onTap: (index) {
           setState(() {
