@@ -7,7 +7,7 @@ class Slide1Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.green,
       body: Container(
         padding: EdgeInsets.all(12.0),
         child: Center(
