@@ -1,28 +1,146 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CustomerNotifyPage extends StatefulWidget {
   const CustomerNotifyPage({super.key});
 
   @override
-  State<CustomerNotifyPage> createState() => _CustomerNotifyPage();
+  _CustomerNotifyPage createState() => _CustomerNotifyPage();
 }
 
 class _CustomerNotifyPage extends State<CustomerNotifyPage> {
+  bool _isLoading = true;
+  List<Map<String, dynamic>> _notifications = [];
+
+  @override
+  void initState () {
+    super.initState();
+    _fetchNotifications();
+  }
+
+  Future<void> _fetchNotifications () async {
+    try {
+      final response = await http.get(
+        Uri.parse(''),
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          _notifications = List<Map<String, dynamic>>.from(data['']);
+          _isLoading = false;
+        });
+      } else {
+        throw Exception("Failed to load notifications");
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e'))
+      );
+    }
+
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notifications',style: TextStyle(fontSize: 25),),
+        title: Text('Notifications',style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24, color: Colors.white),),
         centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.blueGrey,
       ),
-      body: Column(
-        children: [
-          Padding(padding: EdgeInsets.all(16.0),
-          child: Text('Coming soon!'),),
-        ],
+      body: _isLoading ?
+      const CircularProgressIndicator(color: Colors.green,)
+          : _notifications.isEmpty ?
+      const Center( child: Text('No available notifications', style: TextStyle(color: Colors.red),),)
+          : RefreshIndicator(
+        onRefresh: _refreshNotifications,
+        child: ListView.builder(
+          itemCount: _notifications.length,
+          itemBuilder: (context, index) {
+            final notifications = _notifications[index];
+            return _buildNotificationsCard(notifications);
+          },
+        ),
+      )
+    );
+  }
+
+  Widget _buildNotificationsCard(Map<String, dynamic> notifications) {
+    final icon = _getIconForType(notifications['type']);
+    final color = notifications['unread'] ? Colors.green : Colors.grey;
+    return Card(
+      child: ListTile(
+        leading: Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+          ),
+          child: Icon(icon, color: color,),
+        ),
+        title: Text(notifications['title'],style: TextStyle(fontWeight: notifications['read'] ? FontWeight.w300 : FontWeight.w700),),
+        subtitle: Text(notifications['message'], style: TextStyle(),),
+        trailing: notifications['read'] ? null : Icon(Icons.mail_lock_outlined, color: Colors.green,),
+        onTap: () {
+          _handleNotificationTap();
+        },
       ),
     );
   }
+
+  IconData _getIconForType(String type) {
+    switch (type) {
+      case 'job_request':
+        return Icons.work_outline;
+      case 'job_accepted':
+        return Icons.thumb_up;
+      case 'payment_received':
+        return Icons.attach_money;
+      case 'rating_received':
+        return Icons.star;
+      case 'system_alert':
+        return Icons.warning;
+      default:
+        return Icons.notifications;
+    }
+  }
+
+  Future<void> _handleNotificationTap() async {
+    try {
+      final response = await http.get(
+        Uri.parse('')
+      );
+    } catch (err) {
+
+    }
+
+    // Handle navigation based on notification type
+    // switch (_notifications[]) {
+    //   case 'job_request':
+    //   // Navigate to job details
+    //     break;
+    //   case 'job_accepted':
+    //   // Navigate to active job
+    //     break;
+    //   case 'payment_received':
+    //   // Navigate to wallet
+    //     break;
+    //   case 'rating_received':
+    //   // Navigate to ratings
+    //     break;
+    //   default:
+    //   // Do nothing for system alerts
+    //     break;
+    // }
+  }
+
+  Future<void> _refreshNotifications() async {
+    // This will be replaced with actual database fetch
+    await Future.delayed(const Duration(seconds: 1));
+    setState(() {});
+  }
+
 }
