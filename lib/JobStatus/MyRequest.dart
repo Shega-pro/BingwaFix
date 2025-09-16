@@ -88,9 +88,9 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
         automaticallyImplyLeading: false,
         title: const Text(
           'My Requests',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24, color: Colors.white),
         ),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.green,
         centerTitle: true,
       ),
       body: Column(
@@ -156,53 +156,72 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                   ),
                   elevation: 3,
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Header row: category + status
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               req['category'] ?? '',
                               style: const TextStyle(
-                                fontSize: 18,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                               decoration: BoxDecoration(
                                 color: _statusColor(req['status']),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
-                                req['status']?.toUpperCase() ?? '',
-                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                (req['status'] ?? '').toUpperCase(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10,
+                                ),
                               ),
                             ),
                           ],
                         ),
+
                         const SizedBox(height: 8),
+
+                        // Description (wrapped automatically, no Expanded)
                         Text(
                           req['description'] ?? '',
-                          style: const TextStyle(fontSize: 15),
+                          style: const TextStyle(fontSize: 14),
+                          softWrap: true,
                         ),
+
                         const SizedBox(height: 8),
+
+                        // Location + Date row
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Location: ${req['location'] ?? ''}',
-                              style: const TextStyle(fontSize: 14, color: Colors.black87),
-                            ),
-                            Text(
-                              'Date: ${req['preferred_date'] != null ? DateFormat('MMM dd, yyyy').format(DateTime.parse(req['preferred_date'])) : ''}',
-                              style: const TextStyle(fontSize: 14, color: Colors.black87),
+                            Flexible(
+                              child: Text(
+                                'Location: ${req['location'] ?? ''}',
+                                style: const TextStyle(fontSize: 14, color: Colors.black87),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
+
+                        Text(
+                          'Date: ${req['preferred_date'] != null ? DateFormat('MMM dd, yyyy').format(DateTime.parse(req['preferred_date'])) : ''}',
+                          style: const TextStyle(fontSize: 14, color: Colors.black87),
+                        ),
+
                         const SizedBox(height: 4),
+
+                        // Time
                         Text(
                           'Time: ${req['preferred_time'] ?? ''}',
                           style: const TextStyle(fontSize: 14, color: Colors.black87),
@@ -210,6 +229,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                       ],
                     ),
                   ),
+
                 );
               },
             ),
