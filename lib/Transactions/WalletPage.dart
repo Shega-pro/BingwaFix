@@ -1,13 +1,11 @@
-import 'package:bingwa_fix/Notifications/FundiNotify.dart';
 import 'package:flutter/material.dart';
-import 'package:bingwa_fix/DashBoard/fundi_stack.dart';
-import 'package:bingwa_fix/JobStatus/JobManager.dart';
+
 
 class FundiWalletPage extends StatefulWidget {
   const FundiWalletPage({super.key});
 
   @override
-  State<FundiWalletPage> createState() => _FundiWalletPageState();
+  _FundiWalletPageState createState() => _FundiWalletPageState();
 }
 
 class _FundiWalletPageState extends State<FundiWalletPage> {
@@ -31,8 +29,9 @@ class _FundiWalletPageState extends State<FundiWalletPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Wallet'),
+        title: const Text('Wallet', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24, color: Colors.white),),
         leading: Icon(Icons.arrow_back_ios),
+        backgroundColor: Colors.green,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
