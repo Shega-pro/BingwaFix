@@ -14,16 +14,17 @@ class CustomerStackPage extends StatefulWidget {
 class _CustomerStackPageState extends State<CustomerStackPage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    CustomerDashboard(),
-    MyRequestsPage(),
-    CustomerNotifyPage(),
-    SettingsPage(),
-  ];
-
-
   @override
   Widget build(BuildContext context) {
+    // get user argument
+    final user = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    final List<Widget> _pages = [
+      CustomerDashboard(),
+      MyRequestsPage(),
+      CustomerNotifyPage(userId: user?['id'] ?? ''), // fallback if null
+      SettingsPage(),
+    ];
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
