@@ -99,7 +99,7 @@ class _DashPage extends State<DashPage> {
               // Navigate to notifications
               Navigator.push(context,
                   MaterialPageRoute(
-                    builder: (context) => const FundiNotificationsPage(),
+                    builder: (context) => FundiNotificationsPage(fundi_id: fundi?['id'] ?? ''),
                   )
               );
             },
