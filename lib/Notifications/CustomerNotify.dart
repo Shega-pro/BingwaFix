@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 class CustomerNotifyPage extends StatefulWidget {
-  const CustomerNotifyPage({super.key});
+  final String userId;
+  const CustomerNotifyPage({super.key, required this.userId});
 
   @override
   _CustomerNotifyPage createState() => _CustomerNotifyPage();
@@ -16,18 +18,18 @@ class _CustomerNotifyPage extends State<CustomerNotifyPage> {
   @override
   void initState () {
     super.initState();
-    _fetchNotifications();
+    _fetchNotifications(widget.userId);
   }
 
-  Future<void> _fetchNotifications () async {
+  Future<void> _fetchNotifications (String userId) async {
     try {
       final response = await http.get(
-        Uri.parse(''),
+        Uri.parse('https://bingwa-fix-backend.vercel.app/api/notifications/$userId'),
       );
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
-          _notifications = List<Map<String, dynamic>>.from(data['']);
+          _notifications = List<Map<String, dynamic>>.from(data);
           _isLoading = false;
         });
       } else {
@@ -50,7 +52,7 @@ class _CustomerNotifyPage extends State<CustomerNotifyPage> {
         title: Text('Notifications',style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24, color: Colors.white),),
         centerTitle: true,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.green,
       ),
       body: _isLoading ?
       const CircularProgressIndicator(color: Colors.green,)
@@ -71,7 +73,7 @@ class _CustomerNotifyPage extends State<CustomerNotifyPage> {
 
   Widget _buildNotificationsCard(Map<String, dynamic> notifications) {
     final icon = _getIconForType(notifications['type']);
-    final color = notifications['unread'] ? Colors.green : Colors.grey;
+    final color = (notifications['status'] == 'unread') ? Colors.green : Colors.grey;
     return Card(
       child: ListTile(
         leading: Container(
@@ -81,11 +83,21 @@ class _CustomerNotifyPage extends State<CustomerNotifyPage> {
           ),
           child: Icon(icon, color: color,),
         ),
-        title: Text(notifications['title'],style: TextStyle(fontWeight: notifications['read'] ? FontWeight.w300 : FontWeight.w700),),
-        subtitle: Text(notifications['message'], style: TextStyle(),),
-        trailing: notifications['read'] ? null : Icon(Icons.mail_lock_outlined, color: Colors.green,),
+        title: Text(notifications['title'],style: TextStyle(fontWeight: (notifications['status'] == 'read') ? FontWeight.w300 : FontWeight.w700),),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(notifications['message']),
+            const SizedBox(height: 4),
+            // Text(
+            //   DateFormat('MMM dd, hh:mm a').format(notifications['timestamp']),
+            //   style: const TextStyle(fontSize: 12, color: Colors.grey),
+            // ),
+          ],
+        ),
+        trailing: (notifications['status'] == 'read') ? null : Icon(Icons.mail_lock_outlined, color: Colors.green,),
         onTap: () {
-          _handleNotificationTap();
+          _handleNotificationTap(notifications['id']);
         },
       ),
     );
@@ -98,7 +110,7 @@ class _CustomerNotifyPage extends State<CustomerNotifyPage> {
       case 'job_accepted':
         return Icons.thumb_up;
       case 'payment_received':
-        return Icons.attach_money;
+        return Icons.attach_money_rounded;
       case 'rating_received':
         return Icons.star;
       case 'system_alert':
@@ -108,11 +120,14 @@ class _CustomerNotifyPage extends State<CustomerNotifyPage> {
     }
   }
 
-  Future<void> _handleNotificationTap() async {
+  Future<void> _handleNotificationTap(String _notificationId) async {
     try {
-      final response = await http.get(
-        Uri.parse('')
+      final response = await http.post(
+        Uri.parse('https://bingwa-fix-backend.vercel.app/api/notifications/mark-read/$_notificationId')
       );
+      if (response.statusCode == 201) {
+
+      }
     } catch (err) {
 
     }
