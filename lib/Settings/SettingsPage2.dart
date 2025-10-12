@@ -4,7 +4,7 @@ class SettingsPage2 extends StatefulWidget {
   const SettingsPage2 ({super.key});
 
   @override
-  State<SettingsPage2> createState() => _SettingsPage2();
+  _SettingsPage2 createState() => _SettingsPage2();
 }
 
 class _SettingsPage2 extends State<SettingsPage2> {
@@ -13,10 +13,10 @@ class _SettingsPage2 extends State<SettingsPage2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),),
+        title: const Text('Settings', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24, color: Colors.white),),
         automaticallyImplyLeading: false,
         centerTitle: true,
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.green,
       ),
       body: ListView(
         children: [
