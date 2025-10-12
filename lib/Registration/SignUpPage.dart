@@ -7,7 +7,7 @@ class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
@@ -58,8 +58,7 @@ class _SignUpPageState extends State<SignUpPage> {
            duration: Duration(seconds: 2),
            dismissDirection: DismissDirection.horizontal,),
        );
-       Navigator.pushReplacementNamed(context,
-           '/login2', arguments: data['user']);
+       Navigator.pushReplacementNamed(context, '/login2', arguments: data['user']);
      } else {
        try {
          final error = json.decode(response.body);
@@ -115,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 17,
-                  color: Colors.blueGrey,
+                  color: Colors.black,
                 ),
               ),
               const SizedBox(height: 30),
@@ -150,7 +149,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.blueGrey,
+                      backgroundColor: Colors.green,
                       // foregroundColor: Colors.white,
                     ),
                   ),
@@ -259,9 +258,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   foregroundColor: Colors.white,
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Colors.green,
                 ),
-                child: _isLoading ? const CircularProgressIndicator(color: Colors.blueGrey,) : const Text('Create Account', style: TextStyle(fontSize: 17),),
+                child: _isLoading ? const CircularProgressIndicator(color: Colors.green,) : const Text('Create Account', style: TextStyle(fontSize: 17),),
               ),
             ],
           ),
