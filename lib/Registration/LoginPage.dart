@@ -7,7 +7,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Logged in successful',
               style: TextStyle(color: Colors.white, fontSize: 15)),
-            backgroundColor: Colors.blueGrey,
+            backgroundColor: Colors.green,
             behavior: SnackBarBehavior.floating,
             margin: EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 17,
-                  color: Colors.blueGrey,
+                  color: Colors.black,
                 ),
               ),
               const SizedBox(height: 30),
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.blueGrey,
+                        backgroundColor: Colors.green,
                         // foregroundColor: Colors.white
                       )
                   ),
@@ -226,7 +226,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   foregroundColor: Colors.white,
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Colors.green,
                 ),
                 child: isLoading
                     ? const CircularProgressIndicator(color: Colors.blue)
