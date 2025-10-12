@@ -6,7 +6,7 @@ class LoginPage2 extends StatefulWidget {
   const LoginPage2({super.key});
 
   @override
-  State <LoginPage2> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 
 }
 
@@ -145,7 +145,7 @@ class _LoginPageState extends State <LoginPage2> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   foregroundColor: Colors.white,
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Colors.green,
                 ),
                 child: isLoading? const CircularProgressIndicator(color: Colors.green,) : const Text('Log In', style: TextStyle(fontSize: 16),),
               ),
