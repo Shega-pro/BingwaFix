@@ -5,7 +5,7 @@ import 'dart:convert';
 class FundiLoginPage extends StatefulWidget{
   const FundiLoginPage({super.key});
 
-  State<FundiLoginPage> createState() => _FundiLoginPageState();
+  _FundiLoginPageState createState() => _FundiLoginPageState();
 }
 
 class _FundiLoginPageState extends State<FundiLoginPage>{
@@ -16,39 +16,43 @@ class _FundiLoginPageState extends State<FundiLoginPage>{
   bool _isLoading = false;
 
   Future<void> _login() async {
-    final String apiUrl = "https://bingwa-fix-backend.vercel.app/api/auth/loginfundi/";
+    try {
+      final String apiUrl = "https://bingwa-fix-backend.vercel.app/api/auth/loginfundi/";
 
-    setState(() {
-      _isLoading = true;
-    });
+      setState(() {
+        _isLoading = true;
+      });
 
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {"Content-Type": "application/json"},
-      body: json.encode({
-        "email": _emailController.text.trim(),
-        "password": _passwordController.text.trim(),
-      }),
-    );
-
-    setState(() {
-      _isLoading = false;
-    });
-
-    if (!mounted) return; // ✅ ensures the widget is still in the tree
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Logged in successfully'))
-      );
-      Navigator.pushReplacementNamed(context, '/fundi_dashboard', arguments: data['fundi']);
-    } else {
-      final error = json.decode(response.body);
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${error[error]}'))
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {"Content-Type": "application/json"},
+        body: json.encode({
+          "email": _emailController.text.trim(),
+          "password": _passwordController.text.trim(),
+        }),
       );
 
+      setState(() {
+        _isLoading = false;
+      });
+
+      if (!mounted) return; // ✅ ensures the widget is still in the tree
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Logged in successfully'))
+        );
+        Navigator.pushReplacementNamed(
+            context, '/fundi_dashboard', arguments: data['fundi']);
+      } else {
+        final error = json.decode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${error[error]}'))
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
     }
 
   }
@@ -128,7 +132,10 @@ class _FundiLoginPageState extends State<FundiLoginPage>{
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueGrey,
+                    backgroundColor: Colors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)
+                    )
                   ),
                   child: _isLoading ? const CircularProgressIndicator(color:  Colors.blue,) : const  Text(
                     'Login',
