@@ -7,7 +7,7 @@ class Slide1Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.all(12.0),
         child: Center(
@@ -15,13 +15,13 @@ class Slide1Page extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.build_circle_outlined, size: 70.0,color: Colors.white,),
+                Icon(Icons.build_circle_outlined, size: 80.0,color: Colors.black87,),
                 SizedBox(height: 10,),
-                Text('BINGWAFIX', style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600, color: Colors.white),),
+                Text('BINGWAFIX', style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.w600, color: Colors.black87),),
                 SizedBox(height: 350,),
-                Text('Trusted Link To Skilled and Reliable Fundis',style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0, color: Colors.white)),
-                SizedBox(height: 20,),
-                Text('Anytime, Anywhere', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0, color: Colors.white))
+                Text('Trusted Link To Skilled and Reliable Fundis',style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0, color: Colors.black87)),
+                SizedBox(height: 10,),
+                Text('Anytime, Anywhere', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0, color: Colors.black87))
               ],
             ),
         ),
@@ -30,12 +30,12 @@ class Slide1Page extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.green,
         ),
           onPressed: () {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LandingPage()));
           },
-          child: Text('Get started',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.blueGrey),)
+          child: Text('Get started',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),)
       ),
       ),
     );

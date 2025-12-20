@@ -1,3 +1,4 @@
+import 'package:bingwa_fix/Profile/customer-profile.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
@@ -114,7 +115,7 @@ class _CustomerDashboard extends State<CustomerDashboard> {
       if (response.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Request submitted succefully'),
-            backgroundColor: Colors.lightGreen,
+            backgroundColor: Colors.white,
             behavior: SnackBarBehavior.floating,
             margin: EdgeInsets.all(12),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
@@ -164,7 +165,7 @@ class _CustomerDashboard extends State<CustomerDashboard> {
       return;
     }
 
-    //   Check permssion
+    //   Check permission
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -206,7 +207,8 @@ class _CustomerDashboard extends State<CustomerDashboard> {
           IconButton(
             icon: const Icon(Icons.person, size: 35,), color: Colors.white,
             onPressed: () {
-              // Navigate to notifications
+              // Navigate to profile
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerProfile(userId: user?['id'])));
             },
           ),
         ],
@@ -218,21 +220,21 @@ class _CustomerDashboard extends State<CustomerDashboard> {
           children: [
             const Text(
               'Tell us what you need and we\'ll connect you with the right Fundi.',
-              style: TextStyle(fontSize: 15, color: Colors.blueGrey),
+              style: TextStyle(fontSize: 15, color: Colors.black87),
             ),
             const SizedBox(height: 24),
             const Text(
               'Service Request Details',
-              style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const Text(
               'Provide as much detail as possible for better matching',
-              style: TextStyle(fontSize: 14, color: Colors.blueGrey),
+              style: TextStyle(fontSize: 15, color: Colors.black87),
             ),
             const SizedBox(height: 16),
             const Text(
               'Service Category',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
@@ -258,7 +260,7 @@ class _CustomerDashboard extends State<CustomerDashboard> {
             const SizedBox(height: 16),
             const Text(
               'Problem Description',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             TextField(
@@ -276,11 +278,9 @@ class _CustomerDashboard extends State<CustomerDashboard> {
               ),
             ),
             const SizedBox(height: 24),
-            const Divider(),
-            const SizedBox(height: 16),
             const Text(
               'Location',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             TextField(
@@ -310,18 +310,22 @@ class _CustomerDashboard extends State<CustomerDashboard> {
                   );
                   },
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 04),
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 13, vertical: 02),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                        side: BorderSide(color: Colors.grey)
+                      ),
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.green,
                     ),
-                    child: const Text("Use current location", style: TextStyle(fontSize: 12),),
+                    child: Icon(Icons.location_on_outlined, size: 25,),
                   )
               ),
             ),
             const SizedBox(height: 16),
             const Text(
               'Preferred Date & Time',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             Row(
@@ -368,7 +372,7 @@ class _CustomerDashboard extends State<CustomerDashboard> {
             const SizedBox(height: 16),
             const Text(
               'Contacts',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             TextField(

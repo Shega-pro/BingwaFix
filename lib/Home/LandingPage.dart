@@ -8,32 +8,32 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 80),
+              const SizedBox(height: 90),
               const Center(
                 child: Text(
                   'Welcome to BingwaFix',
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 28, color: Colors.white),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30, color: Colors.black87),
                 ),
               ),
-              SizedBox(height: 30,),
+              SizedBox(height: 10,),
               const Center(
                 child: Text(
                   'Connecting skilled & trustworthy Fundi with customers who need their services',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
-                    color: Colors.white,
+                    color: Colors.black54,
                   ),
                 ),
               ),
-              const SizedBox(height: 120),
+              const SizedBox(height: 100),
               _buildServiceCard(
                 title: 'I Need Services',
                 buttonText: 'Join as Customer',
@@ -61,7 +61,7 @@ class LandingPage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white24,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(

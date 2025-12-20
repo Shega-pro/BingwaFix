@@ -57,7 +57,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
         return Colors.orange;
       case 'accepted':
       case 'in_progress':
-        return Colors.blue;
+        return Colors.lightBlue;
       case 'completed':
         return Colors.green;
       case 'cancelled':
@@ -154,6 +154,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  color: Colors.white,
                   elevation: 3,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -175,7 +176,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                               decoration: BoxDecoration(
                                 color: _statusColor(req['status']),
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
                                 (req['status'] ?? '').toUpperCase(),
@@ -194,11 +195,11 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                         // Description (wrapped automatically, no Expanded)
                         Text(
                           req['description'] ?? '',
-                          style: const TextStyle(fontSize: 14),
+                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.blueGrey),
                           softWrap: true,
                         ),
 
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 5),
 
                         // Location + Date row
                         Row(
@@ -219,7 +220,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                           style: const TextStyle(fontSize: 14, color: Colors.black87),
                         ),
 
-                        const SizedBox(height: 4),
+                        // const SizedBox(height: 4),
 
                         // Time
                         Text(

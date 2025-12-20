@@ -57,7 +57,7 @@ class _CustomerNotifyPage extends State<CustomerNotifyPage> {
       body: _isLoading ?
       const CircularProgressIndicator(color: Colors.green,)
           : _notifications.isEmpty ?
-      const Center( child: Text('No available notifications', style: TextStyle(color: Colors.red),),)
+      const Center( child: Text('No available notifications', style: TextStyle(color: Colors.redAccent),),)
           : RefreshIndicator(
         onRefresh: _refreshNotifications,
         child: ListView.builder(
@@ -73,17 +73,18 @@ class _CustomerNotifyPage extends State<CustomerNotifyPage> {
 
   Widget _buildNotificationsCard(Map<String, dynamic> notifications) {
     final icon = _getIconForType(notifications['type']);
-    final color = (notifications['status'] == 'unread') ? Colors.green : Colors.grey;
+    final color = (notifications['status'] == 'unread') ? Colors.greenAccent : Colors.white;
     return Card(
       child: ListTile(
         leading: Container(
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
+            color: Colors.black12,
           ),
           child: Icon(icon, color: color,),
         ),
-        title: Text(notifications['title'],style: TextStyle(fontWeight: (notifications['status'] == 'read') ? FontWeight.w300 : FontWeight.w700),),
+        title: Text(notifications['title'],style: TextStyle(fontWeight: (notifications['status'] == 'read') ? FontWeight.w400 : FontWeight.w600),),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -95,11 +96,13 @@ class _CustomerNotifyPage extends State<CustomerNotifyPage> {
             // ),
           ],
         ),
-        trailing: (notifications['status'] == 'read') ? null : Icon(Icons.mail_lock_outlined, color: Colors.green,),
+        trailing: (notifications['status'] == 'read') ? null : Icon(Icons.mail_lock_outlined, color: Colors.black54,),
         onTap: () {
           _handleNotificationTap(notifications['id']);
         },
       ),
+      elevation: 3,
+      color: Colors.white,
     );
   }
 

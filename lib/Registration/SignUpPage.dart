@@ -16,6 +16,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   bool _isLoading = false;
   bool _obsecurePassword = true;
@@ -91,6 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -106,6 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
               ),
               const SizedBox(height: 10),
@@ -114,7 +117,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 17,
-                  color: Colors.black,
+                  color: Colors.black87,
                 ),
               ),
               const SizedBox(height: 30),
@@ -132,7 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: const Text(
                       'Login',
                       style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 16,
                         color: Colors.blueGrey,
                       ),
                     ),
@@ -145,11 +148,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.blueGrey,
                       ),
                     ),
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Colors.grey,
                       // foregroundColor: Colors.white,
                     ),
                   ),
@@ -161,7 +164,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                   labelText: 'Full name',
                   hintText: 'Enter your full name',
-                  hintStyle: TextStyle(color: Colors.blueGrey, fontSize: 15),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -181,7 +184,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   labelText: 'Phone number',
                   prefixText: '+255 ',
                   hintText: 'XXX XXX XXX',
-                  hintStyle: TextStyle(color: Colors.blueGrey, fontSize: 15),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -201,7 +204,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                   labelText: 'Email',
                   hintText: 'Enter your email',
-                  hintStyle: TextStyle(color: Colors.blueGrey, fontSize: 15),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -221,14 +224,18 @@ class _SignUpPageState extends State<SignUpPage> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  floatingLabelStyle: TextStyle(color: Colors.grey),
                   hintText: 'Create a password (min 6 characters)',
-                  hintStyle: TextStyle(color: Colors.blueGrey, fontSize: 14),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.grey
+                    )
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _obsecurePassword ? Icons.visibility_off : Icons.visibility,
+                      _obsecurePassword ? Icons.visibility_off : Icons.visibility, color: Colors.white,
                     ),
                     onPressed: () {
                       setState(() {
@@ -240,6 +247,42 @@ class _SignUpPageState extends State<SignUpPage> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter password';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 30,),
+              TextFormField(
+                obscureText: _obsecurePassword,
+                controller: _confirmPasswordController,
+                decoration: InputDecoration(
+                    labelText: 'Confirm Password',
+                    floatingLabelStyle: TextStyle(color: Colors.grey),
+                    hintText: 'Confirm your password',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(
+                            color: Colors.grey
+                        )
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obsecurePassword ? Icons.visibility_off : Icons.visibility, color: Colors.white,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obsecurePassword = !_obsecurePassword;
+                        });
+                      },
+                    )
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please confirm your password';
+                  }
+                  if (value != _passwordController.text) {
+                    return 'Password do not match';
                   }
                   return null;
                 },

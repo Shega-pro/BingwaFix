@@ -1,7 +1,4 @@
-import 'package:bingwa_fix/Notifications/FundiNotify.dart';
 import 'package:flutter/material.dart';
-import 'package:bingwa_fix/DashBoard/fundi_stack.dart';
-import 'package:bingwa_fix/Transactions/WalletPage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -44,7 +41,7 @@ class _FundiMyJobsPageState extends State<FundiMyJobsPage> {
     } catch (e) {
       setState(() => _isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Network error'),
+          SnackBar(content: Text('Network error: $e'),
           )
       );
     }
@@ -58,7 +55,7 @@ class _FundiMyJobsPageState extends State<FundiMyJobsPage> {
       appBar: AppBar(
         title: const Text('Job Management', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24, color: Colors.white),),
         centerTitle: true,
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.green,
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(

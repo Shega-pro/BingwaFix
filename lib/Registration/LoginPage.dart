@@ -45,8 +45,8 @@ class _LoginPageState extends State<LoginPage> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Logged in successful',
-              style: TextStyle(color: Colors.white, fontSize: 15)),
-            backgroundColor: Colors.green,
+              style: TextStyle(color: Colors.black87, fontSize: 15)),
+            backgroundColor: Colors.white,
             behavior: SnackBarBehavior.floating,
             margin: EdgeInsets.all(10),
             shape: RoundedRectangleBorder(
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -121,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
               ),
               const SizedBox(height: 10),
@@ -129,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 17,
-                  color: Colors.black,
+                  color: Colors.black87,
                 ),
               ),
               const SizedBox(height: 30),
@@ -143,11 +144,11 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.blueGrey,
                       ),
                     ),
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Colors.grey,
                         // foregroundColor: Colors.white
                       )
                   ),
@@ -171,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: InputDecoration(
                   labelText: 'Email',
                   hintText: 'Enter your email',
-                  hintStyle: TextStyle(color: Colors.blueGrey, fontSize: 15),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -191,13 +192,13 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: InputDecoration(
                   labelText: 'Password',
                   hintText: 'Enter password',
-                  hintStyle: TextStyle(color: Colors.blueGrey, fontSize: 15),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _obsecurePassword ? Icons.visibility_off : Icons.visibility,
+                      _obsecurePassword ? Icons.visibility_off : Icons.visibility, color: Colors.black87,
                     ),
                     onPressed: () {
                       setState(() {
@@ -229,7 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                   backgroundColor: Colors.green,
                 ),
                 child: isLoading
-                    ? const CircularProgressIndicator(color: Colors.blue)
+                    ? const CircularProgressIndicator(color: Colors.green)
                     : const Text('Sign In', style: TextStyle(fontSize: 17),),
               ),
             ],

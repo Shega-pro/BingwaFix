@@ -37,7 +37,7 @@ class FundiAuthPortal extends StatelessWidget {
                     side: BorderSide(color: Colors.white60, width: 1),
                   ),
                   backgroundColor: Colors.green,
-                  padding: EdgeInsets.symmetric(horizontal: 28, vertical: 10),
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 ),
               ),
             ],

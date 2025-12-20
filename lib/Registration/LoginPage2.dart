@@ -60,7 +60,7 @@ class _LoginPageState extends State <LoginPage2> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
           child: Column(
@@ -71,11 +71,11 @@ class _LoginPageState extends State <LoginPage2> {
                 'Welcome Back! ${user?['full_name']}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 05),
               const Text(
                 'Log in to request fundi services',
                 textAlign: TextAlign.center,
@@ -106,7 +106,7 @@ class _LoginPageState extends State <LoginPage2> {
 
               TextFormField(
                 controller: _passwordController,
-                obscureText: true,
+                obscureText: _obsecurePassword,
                 decoration: InputDecoration(
                   labelText: 'Password',
                   hintText: 'Enter password',
@@ -140,14 +140,14 @@ class _LoginPageState extends State <LoginPage2> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.green,
                 ),
-                child: isLoading? const CircularProgressIndicator(color: Colors.green,) : const Text('Log In', style: TextStyle(fontSize: 16),),
+                child: isLoading? const CircularProgressIndicator(color: Colors.green,) : const Text('Log In', style: TextStyle(fontSize: 18),),
               ),
             ],
           ),
