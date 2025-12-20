@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -29,15 +31,16 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
 
-        // --- ADDED CODE STARTS HERE ---
-        def localProperties = new Properties()
-        def localPropertiesFile = rootProject.file('local.properties')
+        // --- ADDED CODE FOR KOTLIN DSL STARTS HERE ---
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
         if (localPropertiesFile.exists()) {
-            localProperties.load(new FileInputStream(localPropertiesFile))
+            localProperties.load(localPropertiesFile.inputStream())
         }
-        def mapsApiKey = localProperties.getProperty('MAPS_API_KEY', '')
-        manifestPlaceholders = [MAPS_API_KEY: mapsApiKey]
-        // --- ADDED CODE ENDS HERE ---
+        val mapsApiKey = localProperties.getProperty("MAPS_API_KEY", "")
+
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
+        // --- ADDED CODE FOR KOTLIN DSL ENDS HERE --
     }
 
     buildTypes {
