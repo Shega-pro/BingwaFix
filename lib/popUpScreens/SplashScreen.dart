@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Colors.white,
               ),
               SizedBox(height: 21,),
-              Text("BINGWAFIX",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.white),)
+              Text("BINGWAFIX APP",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.white),)
             ],
           ),
         )
